@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "4c6b5e55-2f49-4ecb-8cdf-5c7d7baa57e0",
+		"name": "Weather",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Weather By city and country name",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "vishnu123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "vishnu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/weatherService/v1/weather/cityAndCountry?cityName=Dubai&countryName=UAE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"weatherService",
+						"v1",
+						"weather",
+						"cityAndCountry"
+					],
+					"query": [
+						{
+							"key": "cityName",
+							"value": "Dubai"
+						},
+						{
+							"key": "countryName",
+							"value": "UAE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Weather by coordinates",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "vishnu123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "vishnu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/weatherService/v1/weather/coordinates?lat=24.4539&lon=54.3773",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"weatherService",
+						"v1",
+						"weather",
+						"coordinates"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "24.4539"
+						},
+						{
+							"key": "lon",
+							"value": "54.3773"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Registration",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"vishnu\",\r\n\"password\":\"vishnu123\",\r\n\"email\":\"vish@yahoo.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/weatherService/v1/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"weatherService",
+						"v1",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
