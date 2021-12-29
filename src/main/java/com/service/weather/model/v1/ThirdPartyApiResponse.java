@@ -1,8 +1,9 @@
 package com.service.weather.model.v1;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ThirdPartyApiResponse {
+public class ThirdPartyApiResponse implements Serializable {
     private ThirdPartyAPICoord coord;
     private List<ThirdPartyApiWeather> weather;
     private String base;

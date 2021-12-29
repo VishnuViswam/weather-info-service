@@ -1,11 +1,13 @@
 package com.service.weather.controller.v1;
 
 import com.service.weather.model.v1.ApiResponse;
+import com.service.weather.model.v1.ApiSuccessResponse;
 import com.service.weather.service.v1.GeneralService;
 import com.service.weather.service.v1.WeatherService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,9 +42,9 @@ public class WeatherController {
     public ResponseEntity<Object> getWeatherByCityAndCountryName(@RequestParam(name = "cityName", required = true) String cityName,
                                                                  @RequestParam(name = "countryName", required = true) String countryName) {
         logger.debug("<--- Service to get weather using city and country request : received --->");
-        ApiResponse response = weatherService.getWeatherUsingCityAndCountry(cityName, countryName);
+        ApiSuccessResponse apiSuccessResponse = weatherService.getWeatherUsingCityAndCountry(cityName, countryName);
         logger.debug("<--- Service to get weather using city and country response : given --->");
-        return generalService.prepareHttpResponse(response);
+        return ResponseEntity.status(HttpStatus.OK).body(apiSuccessResponse);
 
     }
 
@@ -57,9 +59,9 @@ public class WeatherController {
     public ResponseEntity<Object> getWeatherByCoordinates(@RequestParam(name = "lat", required = true) String lat,
                                                           @RequestParam(name = "lon", required = true) String lon) {
         logger.debug("<--- Service to get weather using city and country request : received --->");
-        ApiResponse response = weatherService.getWeatherUsingCoordinates(lat, lon);
+        ApiSuccessResponse apiSuccessResponse = weatherService.getWeatherUsingCoordinates(lat, lon);
         logger.debug("<--- Service to get weather using city and country response : given --->");
-        return generalService.prepareHttpResponse(response);
+        return ResponseEntity.status(HttpStatus.OK).body(apiSuccessResponse);
 
     }
 

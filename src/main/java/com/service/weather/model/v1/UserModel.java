@@ -1,6 +1,8 @@
 package com.service.weather.model.v1;
 
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * This is a custom model of user account.
  * Doesn't have any connection with database
@@ -11,10 +13,13 @@ package com.service.weather.model.v1;
  */
 public class UserModel {
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String email;
 
+    @NotBlank
     private String password;
 
     public UserModel() {

@@ -1,6 +1,8 @@
 package com.service.weather.model.v1;
 
-public class ThirdPartyApiSys {
+import java.io.Serializable;
+
+public class ThirdPartyApiSys implements Serializable {
 
     private int type;
     private int id;

@@ -16,11 +16,15 @@
  * Apache http client : version  - 4.5.6
  * Mssql connector : version  - 9.4.1.jre8
  * Jpa : version  - 2.6.2
+ * Spring boot valdation : version  - 2.6.1
+ * Spring boot redis : version  - 2.6.1
+ * Spring boot cache : version  - 2.4.0
 
 ## Repository contains:-
 
 * Application Source code
 * Postman script
+* Redis server package
 
 ## Steps to run applications
 
@@ -33,6 +37,8 @@
 	* username : testuser
 	* password : testuser@123
 	* Please map this user with "weather_service" named db and provide read,write and ddladmin privilages.
+* Extract the redis server zip files and run the redis erver.
+	* Double click the "redis-server.exe" named file to run the redis server.
 * To run the application , open a cmd window under application build folder
 	* weather-info-service\target
 	* Execute the following command 

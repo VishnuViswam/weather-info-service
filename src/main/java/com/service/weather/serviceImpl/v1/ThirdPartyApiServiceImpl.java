@@ -1,7 +1,9 @@
 package com.service.weather.serviceImpl.v1;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.service.weather.model.v1.ThirdPartyApiResponse;
 import com.service.weather.model.v1.ThirdPartyApiResponseWithStatus;
 import com.service.weather.service.v1.ThirdPartyApiService;
 import com.service.weather.service.v1.ValidationService;
@@ -53,8 +55,10 @@ public class ThirdPartyApiServiceImpl implements ThirdPartyApiService {
     @Override
     public ThirdPartyApiResponseWithStatus getWeatherByCityAndCountryNames(String cityName, String countryName) {
         ThirdPartyApiResponseWithStatus thirdPartyApiResponseWithStatus = null;
+        ThirdPartyApiResponse thirdPartyApiResponse = null;
         JsonObject jsonObject = null;
         JsonParser parser = new JsonParser();
+        Gson gson = null;
 
         CloseableHttpClient closeableHttpClient = null;
         URI uri = null;
@@ -81,8 +85,10 @@ public class ThirdPartyApiServiceImpl implements ThirdPartyApiService {
 
                 // Response data is assigned to a json object
                 jsonObject = parser.parse(EntityUtils.toString(responseEntity, "UTF-8")).getAsJsonObject();
+                gson = new Gson();
+                thirdPartyApiResponse = gson.fromJson(jsonObject.toString(), ThirdPartyApiResponse.class);
             }
-            thirdPartyApiResponseWithStatus = new ThirdPartyApiResponseWithStatus(jsonObject, response.getStatusLine().getStatusCode());
+            thirdPartyApiResponseWithStatus = new ThirdPartyApiResponseWithStatus(thirdPartyApiResponse, response.getStatusLine().getStatusCode());
         } catch (Exception e) {
             logger.error("Third party API execution : Exception ", e);
         } finally {
@@ -108,8 +114,10 @@ public class ThirdPartyApiServiceImpl implements ThirdPartyApiService {
     @Override
     public ThirdPartyApiResponseWithStatus getWeatherByCoordinates(String lat, String lon) {
         ThirdPartyApiResponseWithStatus thirdPartyApiResponseWithStatus = null;
+        ThirdPartyApiResponse thirdPartyApiResponse = null;
         JsonObject jsonObject = null;
         JsonParser parser = new JsonParser();
+        Gson gson = null;
 
         CloseableHttpClient closeableHttpClient = null;
         URI uri = null;
@@ -137,8 +145,10 @@ public class ThirdPartyApiServiceImpl implements ThirdPartyApiService {
 
                 // Response data is assigned to a json object
                 jsonObject = parser.parse(EntityUtils.toString(responseEntity, "UTF-8")).getAsJsonObject();
+                gson = new Gson();
+                thirdPartyApiResponse = gson.fromJson(jsonObject.toString(), ThirdPartyApiResponse.class);
             }
-            thirdPartyApiResponseWithStatus = new ThirdPartyApiResponseWithStatus(jsonObject, response.getStatusLine().getStatusCode());
+            thirdPartyApiResponseWithStatus = new ThirdPartyApiResponseWithStatus(thirdPartyApiResponse, response.getStatusLine().getStatusCode());
         } catch (Exception e) {
             logger.error("Third party API execution : Exception ", e);
         } finally {

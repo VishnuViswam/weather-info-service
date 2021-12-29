@@ -1,6 +1,8 @@
 package com.service.weather.model.v1;
 
-public class ThirdPartyApiWind {
+import java.io.Serializable;
+
+public class ThirdPartyApiWind implements Serializable {
 
     private double speed;
     private int deg;

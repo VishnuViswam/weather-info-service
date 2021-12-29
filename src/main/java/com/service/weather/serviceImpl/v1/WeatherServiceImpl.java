@@ -2,6 +2,8 @@ package com.service.weather.serviceImpl.v1;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.service.weather.custom.exceptions.NoDataFoundException;
+import com.service.weather.custom.exceptions.ThirdPartyApiException;
 import com.service.weather.model.v1.*;
 import com.service.weather.service.v1.ThirdPartyApiService;
 import com.service.weather.service.v1.ValidationService;
@@ -10,6 +12,7 @@ import com.service.weather.utility.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -33,46 +36,40 @@ public class WeatherServiceImpl implements WeatherService {
     private ThirdPartyApiService thirdPartyApiService;
 
     @Override
-    public ApiResponse getWeatherUsingCityAndCountry(String cityName, String countryName) {
-        ApiResponse apiResponse = null;
+    @Cacheable(value = "WeatherData-byName", unless = "#result.getData() == null", key = "#cityName +#countryName")
+    public ApiSuccessResponse getWeatherUsingCityAndCountry(String cityName, String countryName) {
+        ApiSuccessResponse apiSuccessResponse = null;
         ThirdPartyApiResponseWithStatus thirdPartyApiResponseWithStatus;
         thirdPartyApiResponseWithStatus = thirdPartyApiService.getWeatherByCityAndCountryNames(cityName, countryName);
-        return processWeatherDataForApiResponse(thirdPartyApiResponseWithStatus);
+        apiSuccessResponse = processWeatherDataForApiResponse(thirdPartyApiResponseWithStatus);
+        return apiSuccessResponse;
     }
 
     @Override
-    public ApiResponse getWeatherUsingCoordinates(String lat, String lon) {
-        ApiResponse apiResponse = null;
+    @Cacheable(cacheNames = "WeatherData-byCoordinates", unless = "#result.getData() == null", key = "#lat +#lon")
+    public ApiSuccessResponse getWeatherUsingCoordinates(String lat, String lon) {
+        ApiSuccessResponse apiSuccessResponse = null;
         ThirdPartyApiResponseWithStatus thirdPartyApiResponseWithStatus;
         thirdPartyApiResponseWithStatus = thirdPartyApiService.getWeatherByCoordinates(lat, lon);
-        return processWeatherDataForApiResponse(thirdPartyApiResponseWithStatus);
+        apiSuccessResponse = processWeatherDataForApiResponse(thirdPartyApiResponseWithStatus);
+        return apiSuccessResponse;
     }
 
     @Override
-    public ApiResponse processWeatherDataForApiResponse(ThirdPartyApiResponseWithStatus thirdPartyApiResponseWithStatus) {
-        ApiResponse apiResponse = null;
-        ThirdPartyApiResponse thirdPartyApiResponse = null;
-        Gson gson = null;
-        try {
-            apiResponse = new ApiResponse();
-            if (thirdPartyApiResponseWithStatus != null) {
-                if (thirdPartyApiResponseWithStatus.getApiStatus() == HttpStatus.OK.value()) {
-                    gson = new Gson();
-                    thirdPartyApiResponse = gson.fromJson(thirdPartyApiResponseWithStatus.getData().toString(), ThirdPartyApiResponse.class);
-                    apiResponse.setSuccess(new ApiSuccessResponse(thirdPartyApiResponse));
-                } else {
-                    apiResponse.setError(new ApiErrorResponse(Constants.THIRD_PARTY_API_CALL_FAILED,
-                            Constants.THIRD_PARTY_API_CALL_FAILED_MESSAGE, Calendar.getInstance().getTimeInMillis()));
-                }
+    public ApiSuccessResponse processWeatherDataForApiResponse(ThirdPartyApiResponseWithStatus thirdPartyApiResponseWithStatus) {
+        ApiSuccessResponse apiSuccessResponse = null;
+        apiSuccessResponse = new ApiSuccessResponse();
+        if (thirdPartyApiResponseWithStatus != null) {
+            if (thirdPartyApiResponseWithStatus.getApiStatus() == HttpStatus.OK.value()) {
+                apiSuccessResponse.setData(thirdPartyApiResponseWithStatus.getData());
+            } else if (thirdPartyApiResponseWithStatus.getApiStatus() == HttpStatus.NOT_FOUND.value()) {
+                throw new NoDataFoundException(Constants.NO_DATA_FOUND_CODE, Constants.NO_DATA_FOUND_MESSAGE);
             } else {
-                apiResponse.setError(new ApiErrorResponse(Constants.THIRD_PARTY_API_CALL_FAILED,
-                        Constants.THIRD_PARTY_API_CALL_FAILED_MESSAGE, Calendar.getInstance().getTimeInMillis()));
+                throw new ThirdPartyApiException(Constants.THIRD_PARTY_API_CALL_FAILED_CODE, Constants.THIRD_PARTY_API_CALL_FAILED_MESSAGE);
             }
-        } catch (Exception e) {
-            apiResponse = new ApiResponse();
-            apiResponse.setError(new ApiErrorResponse(Constants.UNKNOWN_ERROR_CODE,
-                    Constants.UNKNOWN_ERROR_MESSAGE, Calendar.getInstance().getTimeInMillis()));
+        } else {
+            throw new ThirdPartyApiException(Constants.THIRD_PARTY_API_CALL_FAILED_CODE, Constants.THIRD_PARTY_API_CALL_FAILED_MESSAGE);
         }
-        return apiResponse;
+        return apiSuccessResponse;
     }
 }

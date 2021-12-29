@@ -1,6 +1,8 @@
 package com.service.weather.model.v1;
 
-public class ThirdPartyAPICoord {
+import java.io.Serializable;
+
+public class ThirdPartyAPICoord implements Serializable {
     private double lon;
     private double lat;
 

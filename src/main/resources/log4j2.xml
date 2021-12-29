@@ -27,17 +27,17 @@
     </Appenders>
 
     <Loggers>
-        <AsyncLogger name="com.service.weather" level="info" additivity="false">
+        <AsyncLogger name="com.service.weather" level="debug" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
             <AppenderRef ref="FileAppender"/>
         </AsyncLogger>
 
-        <AsyncLogger name="org.springframework.boot" level="info" additivity="false">
+        <AsyncLogger name="org.springframework.boot" level="debug" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
             <AppenderRef ref="FileAppender"/>
         </AsyncLogger>
 
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="ConsoleAppender"/>
             <AppenderRef ref="FileAppender"/>
         </Root>

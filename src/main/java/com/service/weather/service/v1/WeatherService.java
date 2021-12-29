@@ -1,6 +1,7 @@
 package com.service.weather.service.v1;
 
 import com.service.weather.model.v1.ApiResponse;
+import com.service.weather.model.v1.ApiSuccessResponse;
 import com.service.weather.model.v1.ThirdPartyApiResponseWithStatus;
 
 /**
@@ -18,7 +19,7 @@ public interface WeatherService {
      * @param countryName
      * @return
      */
-    ApiResponse getWeatherUsingCityAndCountry(String cityName, String countryName);
+    ApiSuccessResponse getWeatherUsingCityAndCountry(String cityName, String countryName);
 
     /**
      * Method to get weather using coordinates
@@ -27,7 +28,7 @@ public interface WeatherService {
      * @param lon
      * @return
      */
-    ApiResponse getWeatherUsingCoordinates(String lat, String lon);
+    ApiSuccessResponse getWeatherUsingCoordinates(String lat, String lon);
 
     /**
      * To process the weather data which is received from third party api
@@ -35,5 +36,5 @@ public interface WeatherService {
      * @param thirdPartyApiResponseWithStatus
      * @return
      */
-    ApiResponse processWeatherDataForApiResponse(ThirdPartyApiResponseWithStatus thirdPartyApiResponseWithStatus);
+    ApiSuccessResponse processWeatherDataForApiResponse(ThirdPartyApiResponseWithStatus thirdPartyApiResponseWithStatus);
 }

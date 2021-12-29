@@ -25,10 +25,6 @@ public class ValidationServiceImpl implements ValidationService {
     private static final Logger logger = LogManager.getLogger(ValidationServiceImpl.class);
 
 
-    @Override
-    public boolean validateUseRegistration(UserModel userModel) {
-        return userModel.getEmail() != null && userModel.getName() != null && userModel.getPassword() != null;
-    }
 
 
     @Override

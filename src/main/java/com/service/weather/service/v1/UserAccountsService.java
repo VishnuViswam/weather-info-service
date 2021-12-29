@@ -1,11 +1,8 @@
 package com.service.weather.service.v1;
 
 import com.service.weather.entity.UserAccounts;
-import com.service.weather.model.v1.ApiResponse;
 import com.service.weather.model.v1.ApiSuccessResponse;
 import com.service.weather.model.v1.UserModel;
-import org.apache.tomcat.util.bcel.classfile.Constant;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
@@ -23,15 +20,7 @@ public interface UserAccountsService {
      * @param userModel
      * @return
      */
-    ApiResponse userRegistration(UserModel userModel);
-
-    /**
-     * Method prepare Api out put data from user entity object
-     *
-     * @param userAccount
-     * @return
-     */
-    ApiSuccessResponse prepareApiOutPutData(UserAccounts userAccount) throws Exception;
+    ApiSuccessResponse userRegistration(UserModel userModel);
 
     /**
      * To get a user using email and status

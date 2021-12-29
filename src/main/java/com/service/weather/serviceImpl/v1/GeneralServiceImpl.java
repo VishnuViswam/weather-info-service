@@ -22,7 +22,7 @@ public class GeneralServiceImpl implements GeneralService {
     public ResponseEntity<Object> prepareHttpResponse(ApiResponse response) {
         if (response.getError() != null) {
             if (Constants.UNKNOWN_ERROR_CODE == response.getError().getError()
-                    || Constants.THIRD_PARTY_API_CALL_FAILED == response.getError().getError()) {
+                    || Constants.THIRD_PARTY_API_CALL_FAILED_CODE == response.getError().getError()) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response.getError());
             } else if (Constants.INCORRECT_DATA_CODE == response.getError().getError()
                     || Constants.DUPLICATE_DATA_ERROR_CODE == response.getError().getError()) {

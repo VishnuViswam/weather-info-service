@@ -1,10 +1,9 @@
 package com.service.weather.model.v1;
 
-import com.google.gson.JsonObject;
 
 public class ThirdPartyApiResponseWithStatus {
 
-    private JsonObject data;
+    private ThirdPartyApiResponse data;
 
     private int apiStatus;
 
@@ -12,16 +11,16 @@ public class ThirdPartyApiResponseWithStatus {
         super();
     }
 
-    public ThirdPartyApiResponseWithStatus(JsonObject data, int apiStatus) {
+    public ThirdPartyApiResponseWithStatus(ThirdPartyApiResponse data, int apiStatus) {
         this.data = data;
         this.apiStatus = apiStatus;
     }
 
-    public JsonObject getData() {
+    public ThirdPartyApiResponse getData() {
         return data;
     }
 
-    public void setData(JsonObject data) {
+    public void setData(ThirdPartyApiResponse data) {
         this.data = data;
     }
 

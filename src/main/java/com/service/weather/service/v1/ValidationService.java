@@ -13,12 +13,6 @@ import org.apache.http.client.methods.CloseableHttpResponse;
  */
 public interface ValidationService {
 
-    /**
-     * To validate user registration Api request
-     * @param userModel
-     * @return
-     */
-    boolean validateUseRegistration(UserModel userModel);
 
     /**
      * To check the API response HTTP status
