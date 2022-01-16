@@ -10,6 +10,7 @@
  * Springfox swagger : version  - 3.0.0
  * Spring boot web : version  - 2.6.2
  * Spring boot security : version  - 2.6.2
+ * Log4j2 : version  - 2.15.0
  * Google Gson : version  - 2.8.5
  * Jspyt : version  - 3.0.4
  * Apache http client : version  - 4.5.6
