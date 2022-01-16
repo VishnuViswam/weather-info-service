@@ -4,8 +4,8 @@ import com.service.weather.custom.exceptions.NoDataFoundException;
 import com.service.weather.custom.exceptions.ThirdPartyApiException;
 import com.service.weather.model.v1.ApiErrorResponse;
 import com.service.weather.utility.Constants;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ import java.util.NoSuchElementException;
 @ControllerAdvice
 public class CommonExceptionHandlingController extends ResponseEntityExceptionHandler {
 
-    private static final Logger logger = LogManager.getLogger(CommonExceptionHandlingController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommonExceptionHandlingController.class);
 
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException httpRequestMethodNotSupportedException,

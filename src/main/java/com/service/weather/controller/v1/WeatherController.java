@@ -4,8 +4,8 @@ import com.service.weather.model.v1.ApiResponse;
 import com.service.weather.model.v1.ApiSuccessResponse;
 import com.service.weather.service.v1.GeneralService;
 import com.service.weather.service.v1.WeatherService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("v1/weather")
 public class WeatherController {
 
-    private static final Logger logger = LogManager.getLogger(WeatherController.class);
+    private static final Logger logger = LoggerFactory.getLogger(WeatherController.class);
 
     @Autowired
     private WeatherService weatherService;

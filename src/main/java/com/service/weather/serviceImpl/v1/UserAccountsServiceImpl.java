@@ -7,8 +7,8 @@ import com.service.weather.service.v1.PasswordHashingService;
 import com.service.weather.service.v1.UserAccountsService;
 import com.service.weather.service.v1.ValidationService;
 import com.service.weather.utility.Constants;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -29,7 +29,7 @@ import java.util.Optional;
 @Scope(value = "prototype")
 public class UserAccountsServiceImpl implements UserAccountsService {
 
-    private static final Logger logger = LogManager.getLogger(UserAccountsServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserAccountsServiceImpl.class);
 
     @Autowired
     private UserAccountsRepository userAccountsRepository;

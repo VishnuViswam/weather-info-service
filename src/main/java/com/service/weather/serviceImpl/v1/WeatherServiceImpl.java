@@ -9,8 +9,8 @@ import com.service.weather.service.v1.ThirdPartyApiService;
 import com.service.weather.service.v1.ValidationService;
 import com.service.weather.service.v1.WeatherService;
 import com.service.weather.utility.Constants;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
@@ -30,7 +30,7 @@ import java.util.Calendar;
 @Scope(value = "prototype")
 public class WeatherServiceImpl implements WeatherService {
 
-    private static final Logger logger = LogManager.getLogger(WeatherService.class);
+    private static final Logger logger = LoggerFactory.getLogger(WeatherService.class);
 
     @Autowired
     private ThirdPartyApiService thirdPartyApiService;

@@ -1,7 +1,7 @@
 package com.service.weather.security;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final Logger logger = LogManager.getLogger(SpringSecurityConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(SpringSecurityConfig.class);
 
     @Autowired
     private UserDetailsService userDetailsService;
